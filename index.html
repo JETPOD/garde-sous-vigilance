@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#144d49">
+  <title>Garde sous vigilance | Simulation d’hygiène hospitalière</title>
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="cases.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<header class="header">
+  <a class="brand" href="#" id="brand" aria-label="Garde sous vigilance, accueil">
+    <svg role="img" aria-label="Emblème Garde sous vigilance" viewBox="0 0 40 44" width="34" height="38" fill="none"><path d="M20 3 35 9v13c0 10-9 16-15 19C14 38 5 32 5 22V9Z" stroke="currentColor" stroke-width="2.4"/><path d="M12 22h5l3-8 4 15 3-7h5" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+    <span>Garde sous vigilance<small>SIMULATION · HYGIÈNE HOSPITALIÈRE</small></span>
+  </a>
+  <div class="header-actions"><span class="pill desktop">Parcours internes</span><button class="quiet" id="theme" aria-label="Changer le thème">Mode sombre</button></div>
+</header>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="eyebrow">VOTRE ESPACE DE GARDE</div>
+    <nav aria-label="Navigation principale">
+      <button class="nav active" id="nav-home"><span>01</span> Les situations</button>
+      <button class="nav" id="nav-results"><span>02</span> Mon débriefing <b id="done-count">0/9</b></button>
+      <button class="nav" id="nav-sources"><span>03</span> Référentiels</button>
+    </nav>
+    <div class="sidebar-note"><span class="eyebrow">LA BONNE POSTURE</span><h3>Observer.<br>Protéger.<br>Coordonner.</h3><p>La sécurité avant la vitesse. Vous avez le droit d’hésiter et de recommencer.</p></div>
+    <div class="sidebar-bottom"><span class="status-dot"></span> Session anonyme<small>Progression conservée uniquement tant que cette page reste ouverte.</small></div>
+  </aside>
+  <main id="main" tabindex="-1"></main>
+</div>
+<footer>Prototype pédagogique v0.3.1 · 30 septembre 2026 · Cas fictifs · Validation EOH requise avant diffusion institutionnelle.<span id="perf">Interface prête</span></footer>
+<dialog id="dialog"><div id="dialog-content"></div><button id="close-dialog" class="secondary">Fermer</button></dialog>
+</body>
+</html>
