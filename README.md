@@ -2,6 +2,8 @@
 
 Serious game d’hygiène hospitalière destiné aux internes aux urgences. Version pédagogique **v0.3.1**, du 30 septembre 2026.
 
+**[Jouer en ligne](https://jetpod.github.io/garde-sous-vigilance/)** · [Consulter le dépôt](https://github.com/JETPOD/garde-sous-vigilance)
+
 ## Objectif
 
 S’entraîner à repérer un risque infectieux, choisir les protections, organiser les gestes et transmettre une alerte. Le parcours propose **9 situations fictives et 36 décisions corrigées**, pour environ 45 minutes ; chaque dossier peut aussi être ouvert indépendamment.
