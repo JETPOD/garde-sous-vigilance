@@ -1,6 +1,6 @@
 # Garde sous vigilance
 
-Serious game d’hygiène hospitalière destiné aux internes aux urgences. Version pédagogique **v0.3.1**, du 30 septembre 2026.
+Serious game d’hygiène hospitalière destiné aux internes aux urgences. Version pédagogique **v0.3.2**, du 2 octobre 2026.
 
 **[Jouer en ligne](https://jetpod.github.io/garde-sous-vigilance/)** · [Consulter le dépôt](https://github.com/JETPOD/garde-sous-vigilance)
 
@@ -75,8 +75,25 @@ Les liens des fichiers du jeu sont relatifs afin de fonctionner sous le sous-che
 
 Les questions médicales, les choix de réponses et les circuits organisationnels doivent être relus après chaque modification. Le simple déploiement technique n’atteste pas de leur validation clinique.
 
-## Dépendances et confidentialité
+## Mesure d’audience et confidentialité
 
-La police General Sans est chargée depuis Fontshare. Les liens de références ouvrent des sites externes ; aucun outil de mesure d’audience n’est intégré dans le code du jeu.
+Le site public utilise Plausible pour mesurer les pages vues et les événements suivants :
+
+- `Jeu démarré`
+- `Dossier 01 démarré` à `Dossier 09 démarré`
+- `Dossier 01 terminé` à `Dossier 09 terminé`
+- `Parcours terminé`
+
+Le suivi ne transmet ni nom, ni réponse, ni score, ni erreur critique. Les événements utilisent des noms distincts par dossier afin de ne pas dépendre des propriétés personnalisées de Plausible. Le script de mesure ne se charge que sur `jetpod.github.io`, et non dans les prévisualisations ou lors des tests locaux.
+
+Le suivi automatique des liens sortants, des téléchargements et des formulaires est désactivé. L’URL est transmise sans paramètres ni fragment et le référent est supprimé ; aucune propriété personnalisée ou valeur de revenu n’est envoyée. Une liste fermée limite les noms d’événements autorisés.
+
+Le début du jeu est compté une seule fois pendant la vie de la page, à l’ouverture du premier dossier. Chaque nouvelle tentative d’un dossier est comptée, mais une reprise, un retour au menu ou la consultation d’un débriefing ne crée pas de nouveau démarrage. Un dossier est terminé au passage à son débriefing après quatre décisions. Un parcours complet est compté une seule fois lorsque les neuf dossiers ont été terminés dans la même page, quel que soit leur ordre ou le score. Un rechargement commence une nouvelle séquence de jeu ; ces compteurs ne sont pas un décompte de personnes physiques ni une validation de formation.
+
+Voir [le guide de configuration Plausible](ANALYTICS.md) pour activer l’affichage des événements dans le tableau de bord privé.
+
+Plausible fonctionne sans cookie ni identifiant persistant. Sa [politique de données](https://plausible.io/data-policy) explique le traitement transitoire de l’adresse IP et du navigateur pour produire des statistiques quotidiennes agrégées. Une information correspondante est affichée dans l’écran « Référentiels » du jeu.
+
+La police General Sans est chargée depuis Fontshare et les liens de références ouvrent des sites externes.
 
 Ne pas introduire de données de patients réels dans les scénarios ou les contributions. Ce dépôt ne contient que le jeu, ses références et sa documentation, sans historique de conversation ni fichiers de travail internes.

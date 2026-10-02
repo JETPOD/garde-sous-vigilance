@@ -1,6 +1,10 @@
 const main=document.querySelector("#main");
 const state={view:"home",caseIndex:0,step:0,answers:{},runs:{},drafts:{},selected:[],revealed:false,clues:new Set()};
 const dims=["Repérage","Protection","Gestes sûrs","Coordination"];
+const analyticsSeen=new Set();
+function trackEvent(name){try{if(typeof window.plausible==="function")window.plausible(name)}catch{/* La mesure ne doit jamais interrompre les soins simulés. */}}
+function trackOnce(key,name){if(analyticsSeen.has(key))return;analyticsSeen.add(key);trackEvent(name)}
+function trackCase(action,i){trackEvent(`Dossier ${CASES[i].code} ${action}`)}
 let theme=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";
 function setTheme(){document.documentElement.dataset.theme=theme;document.querySelector("#theme").textContent=theme==="dark"?"Mode clair":"Mode sombre";}
 setTheme();
@@ -18,6 +22,8 @@ document.querySelector("#nav-sources").onclick=()=>setView("sources");
 document.querySelector("#close-dialog").onclick=()=>document.querySelector("#dialog").close();
 function startCase(i){
  delete state.drafts[i];
+ trackOnce("game-started","Jeu démarré");
+ trackCase("démarré",i);
  state.caseIndex=i;state.step=0;state.answers[i]=[];state.selected=[];state.revealed=false;state.clues=new Set();setView("case");
 }
 function resumeCase(i){
@@ -77,7 +83,7 @@ function renderSources(){return `<div class="heading"><div><div class="eyebrow">
  ${Object.values(SOURCES).map(s=>`<article class="source-card"><h2><a href="${s.url}" target="_blank" rel="noopener noreferrer">${s.name} ↗</a></h2><p>${s.desc}</p></article>`).join("")}
  <article class="source-card"><h2>Ce que le prototype évalue</h2><p>Quatre dimensions : repérage, protection, gestes sûrs et coordination. Chaque décision vaut 1 point si toutes les réponses attendues, et elles seules, sont sélectionnées. Sinon, elle vaut 0. Les points critiques sont signalés séparément, sans compensation par le score. Ce barème est une convention de conception non validée.</p><p>Les cas sont fictifs. Les paramètres cliniques ne constituent pas un modèle physiologique. Les conséquences affichées illustrent un risque et ne prédisent ni infection ni transmission. La durée annoncée est indicative et aucun temps n’est noté.</p></article>
  <article class="source-card"><h2>À adapter avant une utilisation institutionnelle</h2><p>Faire relire les cas par l’EOH et les référents concernés, tester avec des internes, puis intégrer les circuits locaux : disponibilité des locaux, EPI, prélèvements, interlocuteurs médicaux mobilisables en urgence, alerte REB et transferts. Les définitions de cas REB et les zones à risque doivent être actualisées selon les alertes officielles ; la fenêtre du dossier 04 est fictive. Les dossiers 06 à 09 utilisent des expositions inventées et des référentiels datés, sans décrire une alerte réelle en cours.</p><p>Organisation retenue dans le jeu : hors des horaires de présence de l’EOH, le senior conduit les mesures immédiates selon les protocoles locaux et mobilise les interlocuteurs médicaux et autorités adaptés à la situation. La prise en charge et les alertes urgentes n’attendent pas l’EOH ; une transmission tracée lui permet de reprendre le suivi à ses horaires de présence.</p><p>Les mesures nationales servent de socle. Les décisions complexes, les exceptions et la levée des précautions nécessitent une évaluation clinique et les protocoles validés localement. ESR : établissement de santé de référence ; CNR : centre national de référence ; REB : risque épidémique et biologique. Les dossiers à haut risque entraînent surtout le repérage et l’appel à une équipe expérimentée, pas l’intervention autonome de l’interne.</p></article>
- <article class="source-card"><h2>Confidentialité</h2><p>Aucune donnée réelle de patient, aucun compte, aucun nom d’apprenant. Les réponses restent en mémoire dans cette page et sont perdues à son rechargement. Aucune analyse d’usage n’est ajoutée au jeu. La police est chargée auprès de Fontshare ; les références s’ouvrent sur des sites externes.</p></article>`}
+ <article class="source-card"><h2>Confidentialité et mesure d’audience</h2><p>Aucune donnée réelle de patient, aucun compte et aucun nom d’apprenant. Les réponses et les scores restent en mémoire dans cette page et sont perdus à son rechargement ; ils ne sont pas transmis à l’outil de mesure.</p><p>Le site public utilise Plausible, sans cookie ni identifiant persistant, pour mesurer les pages vues et quatre types d’actions agrégées : jeu démarré, dossier démarré, dossier terminé et parcours terminé. Seuls le numéro du dossier et le type d’action figurent dans le nom de l’événement. Plausible traite notamment l’adresse IP et le navigateur pour produire un identifiant quotidien, sans conserver leurs valeurs brutes. <a href="https://plausible.io/data-policy" target="_blank" rel="noopener noreferrer">Politique de données de Plausible ↗</a></p><p>La police est chargée auprès de Fontshare ; les références s’ouvrent sur des sites externes.</p></article>`}
 function render(){
  const t=performance.now();activeNav();
  main.innerHTML=state.view==="home"?renderHome():state.view==="case"?renderCase():state.view==="case-result"?renderCaseResult():state.view==="results"?renderResults():renderSources();
@@ -99,7 +105,7 @@ function render(){
   state.revealed=true;render();main.querySelector(".feedback").scrollIntoView({block:"nearest"});main.querySelector("#next").focus({preventScroll:true});
  });
  main.querySelector("#next")?.addEventListener("click",()=>{
-  if(state.step===3){delete state.drafts[state.caseIndex];state.runs[state.caseIndex]=state.answers[state.caseIndex].map(a=>({...a,selected:[...a.selected]}));setView("case-result");}
+  if(state.step===3){delete state.drafts[state.caseIndex];state.runs[state.caseIndex]=state.answers[state.caseIndex].map(a=>({...a,selected:[...a.selected]}));trackCase("terminé",state.caseIndex);if(Object.keys(state.runs).length===CASES.length)trackOnce("game-completed","Parcours terminé");setView("case-result");}
   else{state.step++;state.selected=[];state.revealed=false;render();main.querySelector(".question-card").scrollIntoView({block:"start"});main.querySelector("input")?.focus({preventScroll:true});}
  });
  document.querySelector("#perf").textContent=`DOM · rendu ${(performance.now()-t).toFixed(0)} ms`;

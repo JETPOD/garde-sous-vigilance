@@ -9,6 +9,32 @@
   <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="base.css">
   <link rel="stylesheet" href="style.css">
+  <!-- Mesure d’audience Plausible, sans cookie ni identifiant persistant.
+       Le script ne se charge que sur le site public GitHub Pages afin de ne pas
+       comptabiliser les prévisualisations et les tests locaux. -->
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)};
+    plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init({
+      outboundLinks:false,
+      fileDownloads:false,
+      formSubmissions:false,
+      transformRequest:function(payload){
+        if(!/^(pageview|engagement|Jeu démarré|Parcours terminé|Dossier 0[1-9] (démarré|terminé))$/.test(payload.n))return null;
+        payload.u=location.origin+location.pathname;
+        payload.r=null;
+        delete payload.p;
+        delete payload.$;
+        return payload;
+      }
+    });
+    if(location.hostname==="jetpod.github.io"&&location.pathname.startsWith("/garde-sous-vigilance/")){
+      const analyticsScript=document.createElement("script");
+      analyticsScript.async=true;
+      analyticsScript.src="https://plausible.io/js/pa-tStNr5ifi5Ciowo1JXWCY.js";
+      document.head.appendChild(analyticsScript);
+    }
+  </script>
   <script src="cases.js" defer></script>
   <script src="app.js" defer></script>
 </head>
@@ -34,7 +60,7 @@
   </aside>
   <main id="main" tabindex="-1"></main>
 </div>
-<footer>Prototype pédagogique v0.3.1 · 30 septembre 2026 · Cas fictifs · Validation EOH requise avant diffusion institutionnelle.<span id="perf">Interface prête</span></footer>
+<footer>Prototype pédagogique v0.3.2 · 2 octobre 2026 · Cas fictifs · Validation EOH requise avant diffusion institutionnelle.<span id="perf">Interface prête</span></footer>
 <dialog id="dialog"><div id="dialog-content"></div><button id="close-dialog" class="secondary">Fermer</button></dialog>
 </body>
 </html>
