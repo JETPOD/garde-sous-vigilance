@@ -1,7 +1,7 @@
 /* Schéma fermé : aucun texte libre, score individuel ou identifiant d'apprenant.
    Ce fichier doit précéder l'initialisation de Plausible. */
 (() => {
-  const base=/^(pageview|engagement|Jeu démarré|Parcours terminé|Dossier 0[1-9] (démarré|terminé))$/;
+  const base=/^(pageview|engagement|Jeu démarré|Parcours terminé|Dossier 0[1-9] (démarré|terminé)|Attestation · (Participation|Réussite|Excellence))$/;
   const teaching=/^Dossier 0[1-9] (décision adaptée|décision à revoir|erreur critique|bilan sans erreur critique|bilan avec erreur critique)$/;
   let enabled=true;
   window.gsvAnalytics={

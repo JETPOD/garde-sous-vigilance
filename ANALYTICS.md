@@ -29,6 +29,9 @@ Dossier 08 terminé
 Dossier 09 démarré
 Dossier 09 terminé
 Parcours terminé
+Attestation · Participation
+Attestation · Réussite
+Attestation · Excellence
 ```
 
 Plausible demande un objectif correspondant pour afficher un événement personnalisé dans le tableau de bord ; les événements antérieurs à sa création ne sont pas rétroactifs ([documentation Plausible](https://plausible.io/docs/custom-event-goals)). Créer les objectifs avant de diffuser largement le jeu.
@@ -62,6 +65,7 @@ Vérifier également le fuseau horaire du site : **Europe/Paris**. Si d’autres
 - **Dossier démarré** : nouvelle tentative, y compris après un rejeu confirmé. Une reprise ne compte pas comme un nouveau démarrage.
 - **Dossier terminé** : arrivée au débriefing après les quatre décisions, indépendamment du score.
 - **Parcours terminé** : premier achèvement des neuf dossiers pendant la vie de la page.
+- **Attestation · palier** : impression d’une attestation de fin de parcours, comptée par palier (Participation, Réussite, Excellence). Ni le nom saisi ni le score ne sont transmis.
 
 Consulter les nombres totaux d’événements pour compter les tentatives. Les visiteurs ou conversions uniques utilisent la méthode d’identification quotidienne de Plausible et ne constituent pas un registre nominatif des apprenants ([définition des métriques](https://plausible.io/docs/metrics-definitions)).
 

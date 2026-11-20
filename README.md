@@ -22,7 +22,7 @@ S’entraîner à repérer un risque infectieux, choisir les protections, organi
 
 ## Cadre pédagogique et sécurité
 
-Ce prototype n’est ni un protocole de soins, ni un examen validant, ni une attestation. Une relecture par l’EOH et les référents concernés, une adaptation aux circuits locaux et un test avec les apprenants sont nécessaires avant utilisation institutionnelle.
+Ce prototype n’est ni un protocole de soins ni un examen validant. L’attestation proposée en fin de parcours (palier Participation, Réussite ou Réussite avec excellence, signée Dr Jean-Etienne Podik, EOH AHNAC) atteste la participation à un outil pédagogique ; elle ne vaut ni validation des compétences ni action de DPC. Une relecture par l’EOH et les référents concernés, une adaptation aux circuits locaux et un test avec les apprenants sont nécessaires avant utilisation institutionnelle.
 
 Les définitions de cas, zones à risque et alertes sanitaires doivent être actualisées avant utilisation. Les expositions des scénarios sont fictives ; les références datées figurent dans les corrections et dans l’écran « Référentiels ».
 
